@@ -100,7 +100,7 @@ router.post('/:id', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
-    
+
      let id = req.params.id;
 
      let updatedBook = book({
@@ -124,8 +124,6 @@ router.post('/:id', (req, res, next) => {
              res.redirect('/books');
          }
      });
-     
-
 });
 
 // GET - process the delete by user id
@@ -134,8 +132,23 @@ router.get('/delete/:id', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
+     let id = req.params.id;
      
-   
+     console.log(id);
+
+     book.remove({_id: id}, (err) => {
+
+      if(err)
+      {
+          console.log(err);
+          res.end(err);
+      }
+      else
+      {
+           // refresh the book list
+           res.redirect('/books');
+      }
+    });   
 });
 
 
